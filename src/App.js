@@ -1,57 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./app.css";
+import { ONE_MINUTE, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
+import { getStats, getHighlightClass } from "./utils/helpers";
+import { getText } from "./services/text";
 
-const ONE_SECOND = 1000;
-const ONE_MINUTE = 60000;
-
-const TYPING_PROMPT = "Hello World. This is my first typing game.";
-const APPROX_WORD_LENGTH = 5;
-const BACKSPACE = 8;
+import Stats from "./components/stats";
+import Prompt from "./components/prompt";
 
 let typingInterval;
 
-const getStats = ({
-  timeElapsedInMs,
-  correctEntries,
-  incorrectEntries,
-  keyStrokeCount,
-}) => {
-  const correctEntriesCount = correctEntries.length;
-  const incorrectEntriesCount = incorrectEntries.length;
-  const timeElapsedInMin = timeElapsedInMs / ONE_MINUTE;
-
-  const grossWpm = keyStrokeCount / APPROX_WORD_LENGTH / timeElapsedInMin;
-
-  const wpm = (grossWpm - incorrectEntriesCount / timeElapsedInMin).toFixed();
-  const accuracy = ((correctEntriesCount / keyStrokeCount) * 100).toFixed();
-
-  return {
-    wpm: isFinite(wpm) && wpm > 0 ? wpm : null,
-    accuracy: isFinite(accuracy) ? accuracy : null,
-  };
-};
-
-const getHighlightClass = ({ isCorrectSequence, isFinished }) => {
-  if (isFinished) {
-    return "highlight-finished";
-  }
-
-  if (isCorrectSequence) {
-    return "highlight-correct";
-  }
-
-  return "highlight-incorrect";
-};
-
 function App() {
+  const text = getText();
   const typingArea = useRef(null);
   const [gameState, setGameState] = useState({
-    typingPrompt: TYPING_PROMPT,
+    typingPrompt: text,
     correctEntries: [],
     incorrectEntries: [],
     isCorrectSequence: true,
     keyStrokeCount: 0,
-    typingPromptLength: TYPING_PROMPT.length,
+    typingPromptLength: text.length,
   });
   const [timeElapsedInMs, setTimeElapsedInMs] = useState(0);
   const [hasStartedTyping, setHasStartedTyping] = useState(false);
@@ -86,10 +53,24 @@ function App() {
     keyStrokeCount,
   } = gameState;
 
+  const { wpm, accuracy } = getStats({
+    timeElapsedInMs,
+    correctEntries,
+    incorrectEntries,
+    keyStrokeCount,
+  });
+
+  const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
+
   const handleOnKeyPress = ({ charCode }) => {
+    if (isFinished) {
+      return;
+    }
+
     if (!hasStartedTyping) {
       setHasStartedTyping(true);
     }
+
     if (charCode === typingPrompt.charCodeAt(0)) {
       setGameState({
         ...gameState,
@@ -114,7 +95,11 @@ function App() {
   };
 
   const handleOnKeyDown = ({ keyCode }) => {
-    if (keyCode === BACKSPACE) {
+    if (isFinished) {
+      return;
+    }
+
+    if (keyCode === KEYCODE_BACKSPACE) {
       setGameState({
         ...gameState,
         incorrectEntries:
@@ -130,15 +115,6 @@ function App() {
     typingArea.current.focus();
   };
 
-  const { wpm, accuracy } = getStats({
-    timeElapsedInMs,
-    correctEntries,
-    incorrectEntries,
-    keyStrokeCount,
-  });
-
-  const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
-
   return (
     <div onClick={handleClick} className="app">
       <input
@@ -149,36 +125,13 @@ function App() {
         type="text"
         autoFocus
       />
-      <div className="typing-prompt">
-        <div className="correct-entries">
-          {correctEntries.map((correctEntry, index) => {
-            return (
-              <span key={`${correctEntry}-${index}`} className={highlightClass}>
-                {correctEntry}
-              </span>
-            );
-          })}
-          {typingPrompt}
-        </div>
-        <div className="incorrect-entries">
-          {incorrectEntries.map((incorrectEntry, index) => {
-            return (
-              <span
-                key={`${incorrectEntry}-${index}`}
-                className={"highlight-incorrect"}
-              >
-                {incorrectEntry}
-              </span>
-            );
-          })}
-        </div>
-      </div>
-      <div className="typing-stats">
-        WPM: {wpm ? wpm : "-"}
-        <br />
-        ACCURACY: {accuracy ? accuracy : "-"}
-        <br />
-      </div>
+      <Prompt
+        correctEntries={correctEntries}
+        typingPrompt={typingPrompt}
+        incorrectEntries={incorrectEntries}
+        highlightClass={highlightClass}
+      />
+      <Stats wpm={wpm} accuracy={accuracy} />
     </div>
   );
 }

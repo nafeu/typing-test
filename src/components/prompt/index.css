@@ -1,0 +1,11 @@
+.highlight-correct {
+  background-color: green;
+}
+
+.highlight-incorrect {
+  background-color: red;
+}
+
+.highlight-finished {
+  background-color: blue;
+}

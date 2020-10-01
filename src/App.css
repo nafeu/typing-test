@@ -7,15 +7,3 @@
   opacity: 0;
   position: absolute;
 }
-
-.highlight-correct {
-  background-color: green;
-}
-
-.highlight-incorrect {
-  background-color: red;
-}
-
-.highlight-finished {
-  background-color: blue;
-}
