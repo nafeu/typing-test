@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./app.css";
 import { TWO_MINUTES, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
-import { getStats, getHighlightClass } from "./utils/helpers";
+import { getStats, getHighlightClass, getCharByCode } from "./utils/helpers";
 import { getText } from "./services/text";
 
 import Stats from "./components/stats";
@@ -63,6 +63,7 @@ function App() {
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
   const handleOnKeyPress = ({ charCode }) => {
+    console.log({ charCode });
     if (isFinished) {
       return;
     }
@@ -71,7 +72,7 @@ function App() {
       setHasStartedTyping(true);
     }
 
-    if (charCode === typingPrompt.charCodeAt(0)) {
+    if (charCode === typingPrompt.charCodeAt(0) && isCorrectSequence) {
       setGameState({
         ...gameState,
         correctEntries: [...correctEntries, typingPrompt[0]],
@@ -87,7 +88,7 @@ function App() {
     } else {
       setGameState({
         ...gameState,
-        incorrectEntries: [...incorrectEntries, String.fromCharCode(charCode)],
+        incorrectEntries: [...incorrectEntries, getCharByCode(charCode)],
         isCorrectSequence: false,
         keyStrokeCount: keyStrokeCount + 1,
       });
@@ -132,7 +133,7 @@ function App() {
           incorrectEntries={incorrectEntries}
           highlightClass={highlightClass}
         />
-        <Stats wpm={wpm} accuracy={accuracy} />
+        <Stats isFinished={isFinished} wpm={wpm} accuracy={accuracy} />
       </div>
     </div>
   );

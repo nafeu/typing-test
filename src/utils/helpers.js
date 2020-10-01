@@ -1,4 +1,4 @@
-import { ONE_MINUTE, APPROX_WORD_LENGTH } from "./constants";
+import { ONE_MINUTE, APPROX_WORD_LENGTH, KEYCODE_SPACEBAR } from "./constants";
 
 export const getStats = ({
   timeElapsedInMs,
@@ -31,4 +31,11 @@ export const getHighlightClass = ({ isCorrectSequence, isFinished }) => {
   }
 
   return "highlight-warning";
+};
+
+export const getCharByCode = (charCode) => {
+  if (charCode === KEYCODE_SPACEBAR) {
+    return "_";
+  }
+  return String.fromCharCode(charCode);
 };
