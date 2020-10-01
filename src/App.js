@@ -20,18 +20,14 @@ const getStats = ({
   const incorrectEntriesCount = incorrectEntries.length;
   const timeElapsedInMin = timeElapsedInMs / ONE_MINUTE;
 
-  const grossWpm = (
-    keyStrokeCount /
-    APPROX_WORD_LENGTH /
-    timeElapsedInMin
-  ).toFixed();
+  const grossWpm = keyStrokeCount / APPROX_WORD_LENGTH / timeElapsedInMin;
 
   const wpm = (grossWpm - incorrectEntriesCount / timeElapsedInMin).toFixed();
   const accuracy = ((correctEntriesCount / keyStrokeCount) * 100).toFixed();
 
   return {
-    wpm: isFinite(wpm) && wpm > 0 ? wpm : 0,
-    accuracy: isFinite(accuracy) ? accuracy : 0,
+    wpm: isFinite(wpm) && wpm > 0 ? wpm : null,
+    accuracy: isFinite(accuracy) ? accuracy : null,
   };
 };
 
@@ -125,7 +121,7 @@ function App() {
           incorrectEntries.length > 0
             ? incorrectEntries.slice(0, -1)
             : incorrectEntries,
-        isCorrectSequence: incorrectEntries.length === 0,
+        isCorrectSequence: incorrectEntries.length <= 1,
       });
     }
   };
@@ -178,9 +174,9 @@ function App() {
         </div>
       </div>
       <div className="typing-stats">
-        WPM: {wpm}
+        WPM: {wpm ? wpm : "-"}
         <br />
-        ACCURACY: {accuracy}
+        ACCURACY: {accuracy ? accuracy : "-"}
         <br />
       </div>
     </div>
