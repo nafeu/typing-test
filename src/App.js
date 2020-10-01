@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./app.css";
 import { TWO_MINUTES, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
-import { getStats, getHighlightClass, getCharByCode } from "./utils/helpers";
+import {
+  getStats,
+  getHighlightClass,
+  getCharByCode,
+  getProgress,
+} from "./utils/helpers";
 import { getText } from "./services/text";
 
 import Stats from "./components/stats";
 import Prompt from "./components/prompt";
+import ProgressRing from "./components/progress-ring";
 
 let typingInterval;
 
@@ -133,7 +139,18 @@ function App() {
           incorrectEntries={incorrectEntries}
           highlightClass={highlightClass}
         />
-        <Stats isFinished={isFinished} wpm={wpm} accuracy={accuracy} />
+        <div className="row">
+          <div className="column center-column">
+            <ProgressRing
+              stroke={4}
+              radius={60}
+              progress={isFinished ? 0 : getProgress({ timeElapsedInMs })}
+            />
+          </div>
+          <div className="column">
+            <Stats isFinished={isFinished} wpm={wpm} accuracy={accuracy} />
+          </div>
+        </div>
       </div>
     </div>
   );

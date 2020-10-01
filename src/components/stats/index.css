@@ -1,11 +1,20 @@
 .typing-stats {
   border-radius: 20px;
   width: 100%;
+}
+
+.typing-stats-wpm,
+.typing-stats-accuracy {
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f4f5f6;
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px #cfd0d1, -5px -5px 15px #ffffff;
   text-align: center;
 }
 
 .typing-stats-label {
-  font-size: 0.9em;
+  font-size: 1.1em;
   font-weight: 100;
 }
 

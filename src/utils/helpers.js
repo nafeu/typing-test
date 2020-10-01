@@ -1,4 +1,9 @@
-import { ONE_MINUTE, APPROX_WORD_LENGTH, KEYCODE_SPACEBAR } from "./constants";
+import {
+  ONE_MINUTE,
+  TWO_MINUTES,
+  APPROX_WORD_LENGTH,
+  KEYCODE_SPACEBAR,
+} from "./constants";
 
 export const getStats = ({
   timeElapsedInMs,
@@ -38,4 +43,8 @@ export const getCharByCode = (charCode) => {
     return "_";
   }
   return String.fromCharCode(charCode);
+};
+
+export const getProgress = ({ timeElapsedInMs }) => {
+  return 100 - ((timeElapsedInMs / TWO_MINUTES) * 100).toFixed();
 };

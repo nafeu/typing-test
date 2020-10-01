@@ -1,0 +1,7 @@
+circle {
+  transition: 1s ease-in-out all;
+}
+
+svg {
+  margin-top: 20px;
+}
