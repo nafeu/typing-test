@@ -8,10 +8,14 @@
   position: absolute;
 }
 
-.correct-character {
+.highlight-correct {
   background-color: green;
 }
 
-.incorrect-character {
+.highlight-incorrect {
   background-color: red;
+}
+
+.highlight-finished {
+  background-color: blue;
 }
