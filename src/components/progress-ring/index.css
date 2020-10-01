@@ -3,5 +3,9 @@ circle {
 }
 
 svg {
-  margin-top: 20px;
+  margin-top: 10px;
+  border-radius: 100px;
+  background: #f4f5f6;
+  box-shadow: 2.5px 2.5px 7.5px #cfd0d1, -2.5px -2.5px 7.5px #ffffff;
+  padding: 10px;
 }

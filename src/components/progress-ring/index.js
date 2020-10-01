@@ -4,17 +4,35 @@ import "./index.css";
 const ONE_HUNDRED = 100;
 const TWO = 2;
 
-const ProgressRing = ({ radius, stroke, progress }) => {
+const ProgressRing = ({
+  radius,
+  stroke,
+  progress,
+  hasStartedTyping,
+  isFinished,
+}) => {
   const normalizedRadius = radius - stroke * TWO;
   const circumference = normalizedRadius * TWO * Math.PI;
 
   const strokeDashoffset =
     circumference - (progress / ONE_HUNDRED) * circumference;
 
+  const getStroke = () => {
+    if (isFinished) {
+      return "#01a3a4";
+    }
+
+    if (hasStartedTyping) {
+      return "#5f27cd";
+    }
+
+    return "#e9eaeb";
+  };
+
   return (
     <svg height={radius * TWO} width={radius * TWO}>
       <circle
-        stroke="#222f3e"
+        stroke={getStroke()}
         fill="transparent"
         strokeWidth={stroke}
         strokeDasharray={circumference + " " + circumference}

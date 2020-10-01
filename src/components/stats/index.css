@@ -1,6 +1,7 @@
 .typing-stats {
   border-radius: 20px;
   width: 100%;
+  transition: 300ms ease-in-out all;
 }
 
 .typing-stats-wpm,
@@ -21,4 +22,17 @@
 .typing-stats-value {
   font-size: 1.25em;
   font-weight: 800;
+}
+
+.typing-stats-in-progress {
+  opacity: 1;
+  color: #341f97;
+}
+
+.typing-stats-finished {
+  color: #01a3a4;
+}
+
+.typing-stats-standby {
+  opacity: 0.5;
 }

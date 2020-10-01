@@ -45,6 +45,10 @@ export const getCharByCode = (charCode) => {
   return String.fromCharCode(charCode);
 };
 
-export const getProgress = ({ timeElapsedInMs }) => {
+export const getProgress = ({ timeElapsedInMs, isFinished }) => {
+  if (isFinished) {
+    return 0;
+  }
+
   return 100 - ((timeElapsedInMs / TWO_MINUTES) * 100).toFixed();
 };

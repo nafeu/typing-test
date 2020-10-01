@@ -1,6 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./app.css";
-import { TWO_MINUTES, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
+import {
+  TWO_MINUTES,
+  ONE_SECOND,
+  KEYCODE_BACKSPACE,
+  PROGRESS_RING_RADIUS,
+  PROGRESS_RING_STROKE,
+} from "./utils/constants";
 import {
   getStats,
   getHighlightClass,
@@ -65,6 +71,8 @@ function App() {
     incorrectEntries,
     keyStrokeCount,
   });
+
+  const progress = getProgress({ timeElapsedInMs, isFinished });
 
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
@@ -142,13 +150,20 @@ function App() {
         <div className="row">
           <div className="column center-column">
             <ProgressRing
-              stroke={4}
-              radius={60}
-              progress={isFinished ? 0 : getProgress({ timeElapsedInMs })}
+              hasStartedTyping={hasStartedTyping}
+              isFinished={isFinished}
+              stroke={PROGRESS_RING_STROKE}
+              radius={PROGRESS_RING_RADIUS}
+              progress={progress}
             />
           </div>
           <div className="column">
-            <Stats isFinished={isFinished} wpm={wpm} accuracy={accuracy} />
+            <Stats
+              hasStartedTyping={hasStartedTyping}
+              isFinished={isFinished}
+              wpm={wpm}
+              accuracy={accuracy}
+            />
           </div>
         </div>
       </div>
