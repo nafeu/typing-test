@@ -1,5 +1,7 @@
 import React from "react";
 import "./index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faBolt } from "@fortawesome/free-solid-svg-icons";
 
 const ONE_HUNDRED = 100;
 const TWO = 2;
@@ -30,19 +32,26 @@ const ProgressRing = ({
   };
 
   return (
-    <svg height={radius * TWO} width={radius * TWO}>
-      <circle
-        stroke={getStroke()}
-        fill="transparent"
-        strokeWidth={stroke}
-        strokeDasharray={circumference + " " + circumference}
-        style={{ strokeDashoffset }}
-        stroke-width={stroke}
-        r={normalizedRadius}
-        cx={radius}
-        cy={radius}
-      />
-    </svg>
+    <React.Fragment>
+      <svg className="progress-ring" height={radius * TWO} width={radius * TWO}>
+        <circle
+          stroke={getStroke()}
+          fill="transparent"
+          strokeWidth={stroke}
+          strokeDasharray={circumference + " " + circumference}
+          style={{ strokeDashoffset }}
+          r={normalizedRadius}
+          cx={radius}
+          cy={radius}
+        />
+      </svg>
+      <div className="progress-check">
+        <FontAwesomeIcon
+          icon={isFinished ? faCheck : faBolt}
+          color={getStroke()}
+        />
+      </div>
+    </React.Fragment>
   );
 };
 

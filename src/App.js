@@ -15,6 +15,8 @@ import {
 } from "./utils/helpers";
 import { getText } from "./services/text";
 
+import Title from "./components/title";
+import Footer from "./components/footer";
 import Stats from "./components/stats";
 import Prompt from "./components/prompt";
 import ProgressRing from "./components/progress-ring";
@@ -77,13 +79,14 @@ function App() {
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
   const handleOnKeyPress = ({ charCode }) => {
-    console.log({ charCode });
     if (isFinished) {
       return;
     }
 
     if (!hasStartedTyping) {
-      setHasStartedTyping(true);
+      if (charCode === typingPrompt.charCodeAt(0)) {
+        setHasStartedTyping(true);
+      }
     }
 
     if (charCode === typingPrompt.charCodeAt(0) && isCorrectSequence) {
@@ -141,14 +144,16 @@ function App() {
         autoFocus
       />
       <div className="app-container">
+        <Title />
         <Prompt
           correctEntries={correctEntries}
           typingPrompt={typingPrompt}
           incorrectEntries={incorrectEntries}
           highlightClass={highlightClass}
+          hasStartedTyping={hasStartedTyping}
         />
         <div className="row">
-          <div className="column center-column">
+          <div className="column mt-10-negative">
             <ProgressRing
               hasStartedTyping={hasStartedTyping}
               isFinished={isFinished}
@@ -166,6 +171,7 @@ function App() {
             />
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );

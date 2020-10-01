@@ -30,9 +30,11 @@
 .column {
   flex: 50%;
   margin: 10px;
-}
-
-.center-column {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.mt-10-negative {
+  margin-top: -10px;
 }

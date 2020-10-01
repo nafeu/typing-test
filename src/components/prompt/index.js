@@ -6,6 +6,7 @@ const Prompt = ({
   typingPrompt,
   incorrectEntries,
   highlightClass,
+  hasStartedTyping,
 }) => {
   return (
     <div className="typing-prompt">
@@ -22,13 +23,23 @@ const Prompt = ({
             return (
               <span
                 key={`${incorrectEntry}-${index}`}
-                className={"highlight-incorrect"}
+                className={`highlight-incorrect ${
+                  incorrectEntry === "_" ? "is-underline" : ""
+                }`}
               >
                 {incorrectEntry}
               </span>
             );
           })}
         {typingPrompt}
+        {hasStartedTyping ? (
+          ""
+        ) : (
+          <span className="typing-prompt-notice">
+            {" "}
+            (Start typing to begin test.)
+          </span>
+        )}
       </div>
     </div>
   );

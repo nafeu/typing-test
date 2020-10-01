@@ -3,3 +3,8 @@ body {
   color: #222f3e;
   background-color: #f4f5f6;
 }
+
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}

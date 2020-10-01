@@ -1,11 +1,16 @@
-circle {
+circle,
+svg {
   transition: 1s ease-in-out all;
 }
 
-svg {
-  margin-top: 10px;
+.progress-ring {
   border-radius: 100px;
   background: #f4f5f6;
   box-shadow: 2.5px 2.5px 7.5px #cfd0d1, -2.5px -2.5px 7.5px #ffffff;
   padding: 10px;
+}
+
+.progress-check {
+  position: absolute;
+  font-size: 3em;
 }

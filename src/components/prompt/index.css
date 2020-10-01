@@ -1,5 +1,15 @@
 .typing-prompt {
   padding: 20px;
+  cursor: pointer;
+}
+
+.typing-prompt:active {
+  opacity: 0.75;
+}
+
+.typing-prompt-notice {
+  font-weight: 100;
+  opacity: 0.25;
 }
 
 .correct-entries {
@@ -34,4 +44,8 @@
 .highlight-finished {
   color: #01a3a4;
   text-decoration: underline;
+}
+
+.is-underline {
+  color: #ff6b6b;
 }
