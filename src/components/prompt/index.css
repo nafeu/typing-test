@@ -8,8 +8,13 @@
 }
 
 .typing-prompt-notice {
-  font-weight: 100;
-  opacity: 0.25;
+  transition: 1s ease-in-out all;
+  color: #341f97;
+  margin-bottom: 5px;
+}
+
+.hide {
+  opacity: 0;
 }
 
 .correct-entries {
@@ -48,4 +53,13 @@
 
 .is-underline {
   color: #ff6b6b;
+}
+
+.typing-prompt-author {
+  text-align: right;
+  margin-top: 10px;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8em;
+  opacity: 0.15;
 }

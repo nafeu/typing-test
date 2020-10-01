@@ -52,3 +52,7 @@ export const getProgress = ({ timeElapsedInMs, isFinished }) => {
 
   return 100 - ((timeElapsedInMs / TWO_MINUTES) * 100).toFixed();
 };
+
+export const isUnusedKeyPress = (charCode) => {
+  return false; // TODO IMPLEMENT
+};

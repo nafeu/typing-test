@@ -12,6 +12,7 @@ import {
   getHighlightClass,
   getCharByCode,
   getProgress,
+  isUnusedKeyPress,
 } from "./utils/helpers";
 import { getText } from "./services/text";
 
@@ -21,10 +22,10 @@ import Stats from "./components/stats";
 import Prompt from "./components/prompt";
 import ProgressRing from "./components/progress-ring";
 
+const { text, author } = getText();
 let typingInterval;
 
 function App() {
-  const text = getText();
   const typingArea = useRef(null);
   const [gameState, setGameState] = useState({
     typingPrompt: text,
@@ -79,6 +80,10 @@ function App() {
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
   const handleOnKeyPress = ({ charCode }) => {
+    if (isUnusedKeyPress(charCode)) {
+      return;
+    }
+
     if (isFinished) {
       return;
     }
@@ -151,6 +156,7 @@ function App() {
           incorrectEntries={incorrectEntries}
           highlightClass={highlightClass}
           hasStartedTyping={hasStartedTyping}
+          author={author}
         />
         <div className="row">
           <div className="column mt-10-negative">

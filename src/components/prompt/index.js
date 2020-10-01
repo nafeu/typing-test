@@ -7,10 +7,17 @@ const Prompt = ({
   incorrectEntries,
   highlightClass,
   hasStartedTyping,
+  author,
 }) => {
   return (
     <div className="typing-prompt">
       <div className="correct-entries">
+        <div
+          className={`typing-prompt-notice ${hasStartedTyping ? "hide" : ""}`}
+        >
+          {" "}
+          Type the following:
+        </div>
         {correctEntries.map((correctEntry, index) => {
           return (
             <span key={`${correctEntry}-${index}`} className={highlightClass}>
@@ -32,14 +39,7 @@ const Prompt = ({
             );
           })}
         {typingPrompt}
-        {hasStartedTyping ? (
-          ""
-        ) : (
-          <span className="typing-prompt-notice">
-            {" "}
-            (Start typing to begin test.)
-          </span>
-        )}
+        <div className="typing-prompt-author">{author}</div>
       </div>
     </div>
   );
