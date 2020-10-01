@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./app.css";
-import { ONE_MINUTE, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
+import { TWO_MINUTES, ONE_SECOND, KEYCODE_BACKSPACE } from "./utils/constants";
 import { getStats, getHighlightClass } from "./utils/helpers";
 import { getText } from "./services/text";
 
@@ -31,7 +31,7 @@ function App() {
       typingInterval = setInterval(() => {
         const newTimeElapsedInMs = new Date() - timeAtStart;
 
-        if (newTimeElapsedInMs >= ONE_MINUTE) {
+        if (newTimeElapsedInMs >= TWO_MINUTES) {
           clearInterval(typingInterval);
           setIsFinished(true);
         } else {
@@ -125,13 +125,15 @@ function App() {
         type="text"
         autoFocus
       />
-      <Prompt
-        correctEntries={correctEntries}
-        typingPrompt={typingPrompt}
-        incorrectEntries={incorrectEntries}
-        highlightClass={highlightClass}
-      />
-      <Stats wpm={wpm} accuracy={accuracy} />
+      <div className="app-container">
+        <Prompt
+          correctEntries={correctEntries}
+          typingPrompt={typingPrompt}
+          incorrectEntries={incorrectEntries}
+          highlightClass={highlightClass}
+        />
+        <Stats wpm={wpm} accuracy={accuracy} />
+      </div>
     </div>
   );
 }

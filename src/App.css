@@ -1,6 +1,23 @@
 .app {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 75%;
+  height: 50%;
+  margin: 10%;
+  border-radius: 20px;
+  background: #f4f5f6;
+  box-shadow: 20px 20px 60px #cfd0d1, -20px -20px 60px #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  .app-container {
+    height: 75%;
+  }
 }
 
 .typing-area {

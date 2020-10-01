@@ -30,5 +30,5 @@ export const getHighlightClass = ({ isCorrectSequence, isFinished }) => {
     return "highlight-correct";
   }
 
-  return "highlight-incorrect";
+  return "highlight-warning";
 };

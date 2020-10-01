@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./app";
 import * as serviceWorker from "./serviceWorker";
+import "typeface-roboto-mono";
 
 ReactDOM.render(
   <React.StrictMode>

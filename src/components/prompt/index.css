@@ -1,11 +1,37 @@
+.typing-prompt {
+  padding: 20px;
+}
+
+.correct-entries {
+  font-weight: 800;
+  font-size: 1.25em;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 20px;
+  background: #f4f5f6;
+  box-shadow: 5px 5px 15px #cfd0d1, -5px -5px 15px #ffffff;
+}
+
+.incorrect-entries {
+  font-weight: 800;
+  font-size: 1.25em;
+  margin-top: 10px;
+}
+
 .highlight-correct {
-  background-color: green;
+  color: #1dd1a1;
+  text-decoration: underline;
+}
+
+.highlight-warning {
+  background-color: #feca57;
 }
 
 .highlight-incorrect {
-  background-color: red;
+  background-color: #ff6b6b;
 }
 
 .highlight-finished {
-  background-color: blue;
+  color: #01a3a4;
+  text-decoration: underline;
 }

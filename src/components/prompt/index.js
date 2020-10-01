@@ -18,18 +18,21 @@ const Prompt = ({
           );
         })}
         {typingPrompt}
-      </div>
-      <div className="incorrect-entries">
-        {incorrectEntries.map((incorrectEntry, index) => {
-          return (
-            <span
-              key={`${incorrectEntry}-${index}`}
-              className={"highlight-incorrect"}
-            >
-              {incorrectEntry}
-            </span>
-          );
-        })}
+        {incorrectEntries.length > 0 && (
+          <div className="incorrect-entries">
+            Incorrect:{" "}
+            {incorrectEntries.map((incorrectEntry, index) => {
+              return (
+                <span
+                  key={`${incorrectEntry}-${index}`}
+                  className={"highlight-incorrect"}
+                >
+                  {incorrectEntry}
+                </span>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
