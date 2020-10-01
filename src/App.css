@@ -1,0 +1,17 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.typing-area {
+  opacity: 0;
+  position: absolute;
+}
+
+.correct-character {
+  background-color: green;
+}
+
+.incorrect-character {
+  background-color: red;
+}
