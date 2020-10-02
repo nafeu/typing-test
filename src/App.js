@@ -6,15 +6,16 @@ import {
   KEYCODE_BACKSPACE,
   PROGRESS_RING_RADIUS,
   PROGRESS_RING_STROKE,
+  KEYCODE_ENTER,
 } from "./utils/constants";
 import {
   getStats,
   getHighlightClass,
   getCharByCode,
   getProgress,
+  getInitialGameState,
   isUnusedKeyPress,
 } from "./utils/helpers";
-import { getText } from "./services/text";
 
 import Title from "./components/title";
 import Footer from "./components/footer";
@@ -22,19 +23,11 @@ import Stats from "./components/stats";
 import Prompt from "./components/prompt";
 import ProgressRing from "./components/progress-ring";
 
-const { text, author } = getText();
 let typingInterval;
 
 function App() {
   const typingArea = useRef(null);
-  const [gameState, setGameState] = useState({
-    typingPrompt: text,
-    correctEntries: [],
-    incorrectEntries: [],
-    isCorrectSequence: true,
-    keyStrokeCount: 0,
-    typingPromptLength: text.length,
-  });
+  const [gameState, setGameState] = useState(getInitialGameState());
   const [timeElapsedInMs, setTimeElapsedInMs] = useState(0);
   const [hasStartedTyping, setHasStartedTyping] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -66,6 +59,7 @@ function App() {
     incorrectEntries,
     isCorrectSequence,
     keyStrokeCount,
+    author,
   } = gameState;
 
   const { wpm, accuracy } = getStats({
@@ -80,11 +74,17 @@ function App() {
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
   const handleOnKeyPress = ({ charCode }) => {
-    if (isUnusedKeyPress(charCode)) {
+    if (isUnusedKeyPress({ charCode, isFinished })) {
       return;
     }
 
     if (isFinished) {
+      if (charCode === KEYCODE_ENTER) {
+        setGameState(getInitialGameState());
+        setIsFinished(false);
+        setTimeElapsedInMs(0);
+        setHasStartedTyping(false);
+      }
       return;
     }
 
@@ -157,6 +157,7 @@ function App() {
           highlightClass={highlightClass}
           hasStartedTyping={hasStartedTyping}
           author={author}
+          isFinished={isFinished}
         />
         <div className="row">
           <div className="column mt-10-negative">

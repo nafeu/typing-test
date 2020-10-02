@@ -8,15 +8,20 @@ const Prompt = ({
   highlightClass,
   hasStartedTyping,
   author,
+  isFinished,
 }) => {
   return (
     <div className="typing-prompt">
       <div className="correct-entries">
         <div
-          className={`typing-prompt-notice ${hasStartedTyping ? "hide" : ""}`}
+          className={`typing-prompt-notice ${
+            hasStartedTyping && !isFinished ? "hide" : ""
+          }`}
         >
           {" "}
-          Type the following:
+          {isFinished
+            ? "Press enter to start another test."
+            : "Type the following:"}
         </div>
         {correctEntries.map((correctEntry, index) => {
           return (

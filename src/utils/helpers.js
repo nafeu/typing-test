@@ -3,7 +3,10 @@ import {
   TWO_MINUTES,
   APPROX_WORD_LENGTH,
   KEYCODE_SPACEBAR,
+  KEYCODE_ENTER,
 } from "./constants";
+
+import { getText } from "../services/text";
 
 export const getStats = ({
   timeElapsedInMs,
@@ -53,6 +56,25 @@ export const getProgress = ({ timeElapsedInMs, isFinished }) => {
   return 100 - ((timeElapsedInMs / TWO_MINUTES) * 100).toFixed();
 };
 
-export const isUnusedKeyPress = (charCode) => {
-  return false; // TODO IMPLEMENT
+export const isUnusedKeyPress = ({ charCode, isFinished }) => {
+  if (charCode === KEYCODE_ENTER && !isFinished) {
+    return true;
+  }
+  return false;
+};
+
+export const getInitialGameState = () => {
+  const { text, author } = getText();
+
+  const initialGameState = {
+    typingPrompt: text,
+    correctEntries: [],
+    incorrectEntries: [],
+    isCorrectSequence: true,
+    keyStrokeCount: 0,
+    typingPromptLength: text.length,
+    author,
+  };
+
+  return initialGameState;
 };
