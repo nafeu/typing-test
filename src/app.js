@@ -15,6 +15,7 @@ import {
   getProgress,
   getInitialGameState,
   isUnusedKeyPress,
+  getElapsedTime,
 } from "./utils/helpers";
 
 import Title from "./components/title";
@@ -24,6 +25,7 @@ import Prompt from "./components/prompt";
 import ProgressRing from "./components/progress-ring";
 
 let typingInterval;
+let timeAtStart;
 
 function App() {
   const typingArea = useRef(null);
@@ -34,10 +36,10 @@ function App() {
 
   useEffect(() => {
     if (hasStartedTyping && !isFinished) {
-      const timeAtStart = new Date();
+      timeAtStart = new Date();
 
       typingInterval = setInterval(() => {
-        const newTimeElapsedInMs = new Date() - timeAtStart;
+        const newTimeElapsedInMs = getElapsedTime(timeAtStart);
 
         if (newTimeElapsedInMs >= TWO_MINUTES) {
           clearInterval(typingInterval);
@@ -74,6 +76,8 @@ function App() {
   const highlightClass = getHighlightClass({ isCorrectSequence, isFinished });
 
   const handleOnKeyPress = ({ charCode }) => {
+    setTimeElapsedInMs(getElapsedTime(timeAtStart));
+
     if (isUnusedKeyPress({ charCode, isFinished })) {
       return;
     }
@@ -122,7 +126,7 @@ function App() {
       return;
     }
 
-    if (keyCode === KEYCODE_BACKSPACE) {
+    const handleHasIncorrectEntries = () => {
       setGameState({
         ...gameState,
         incorrectEntries:
@@ -131,6 +135,31 @@ function App() {
             : incorrectEntries,
         isCorrectSequence: incorrectEntries.length <= 1,
       });
+    };
+
+    const handleCorrectEntries = () => {
+      const updatedCorrectEntries = correctEntries.slice(0, -1);
+      const updatedTypingPrompt = [
+        correctEntries[correctEntries.length - 1],
+        ...typingPrompt,
+      ].join("");
+
+      setGameState({
+        ...gameState,
+        correctEntries: updatedCorrectEntries,
+        typingPrompt: updatedTypingPrompt,
+      });
+    };
+
+    if (keyCode === KEYCODE_BACKSPACE) {
+      const hasIncorrectEntries = incorrectEntries.length > 0;
+      const hasCorrectEntries = correctEntries.length > 0;
+
+      if (hasIncorrectEntries) {
+        handleHasIncorrectEntries();
+      } else if (hasCorrectEntries) {
+        handleCorrectEntries();
+      }
     }
   };
 

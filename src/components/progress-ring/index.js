@@ -39,7 +39,9 @@ const ProgressRing = ({
           fill="transparent"
           strokeWidth={stroke}
           strokeDasharray={circumference + " " + circumference}
-          style={{ strokeDashoffset }}
+          style={{
+            strokeDashoffset: strokeDashoffset ? strokeDashoffset : 0,
+          }}
           r={normalizedRadius}
           cx={radius}
           cy={radius}

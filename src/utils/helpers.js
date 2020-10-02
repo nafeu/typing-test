@@ -78,3 +78,7 @@ export const getInitialGameState = () => {
 
   return initialGameState;
 };
+
+export const getElapsedTime = (start) => {
+  return new Date() - start;
+};
