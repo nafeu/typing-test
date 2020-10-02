@@ -2,6 +2,8 @@
 
 An experimental typing test with React and a Neumorphism UI design style.
 
+![Typing Test By Nafeu](http://nafeu.com/typing-test/app-preview.png)
+
 ## Installation
 
 ```
@@ -10,7 +12,7 @@ cd typing-test
 npm install
 ```
 
-## Usage
+## Development
 
 ```
 npm start
@@ -19,14 +21,8 @@ npm start
 ## Deployment
 
 ```
-...
+npm run deploy
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
 
 ## License
 
