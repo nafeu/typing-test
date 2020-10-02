@@ -9,8 +9,8 @@
 
 .typing-prompt-notice {
   transition: 1s ease-in-out all;
-  color: #e9eaeb;
   margin-bottom: 5px;
+  font-weight: 100;
 }
 
 .hide {
