@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/typing-test/static/css/main.db2df4ad.chunk.css",
+    "main.js": "/typing-test/static/js/main.5f0c6745.chunk.js",
+    "main.js.map": "/typing-test/static/js/main.5f0c6745.chunk.js.map",
+    "runtime-main.js": "/typing-test/static/js/runtime-main.81fc2885.js",
+    "runtime-main.js.map": "/typing-test/static/js/runtime-main.81fc2885.js.map",
+    "static/css/2.b7eb45ca.chunk.css": "/typing-test/static/css/2.b7eb45ca.chunk.css",
+    "static/js/2.9763044c.chunk.js": "/typing-test/static/js/2.9763044c.chunk.js",
+    "static/js/2.9763044c.chunk.js.map": "/typing-test/static/js/2.9763044c.chunk.js.map",
+    "index.html": "/typing-test/index.html",
+    "precache-manifest.ef166dbaf81a0e391fe2237a1849cbe4.js": "/typing-test/precache-manifest.ef166dbaf81a0e391fe2237a1849cbe4.js",
+    "service-worker.js": "/typing-test/service-worker.js",
+    "static/css/2.b7eb45ca.chunk.css.map": "/typing-test/static/css/2.b7eb45ca.chunk.css.map",
+    "static/css/main.db2df4ad.chunk.css.map": "/typing-test/static/css/main.db2df4ad.chunk.css.map",
+    "static/js/2.9763044c.chunk.js.LICENSE.txt": "/typing-test/static/js/2.9763044c.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/typing-test/static/media/roboto-mono-latin-700italic.b933305e.woff"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.81fc2885.js",
+    "static/css/2.b7eb45ca.chunk.css",
+    "static/js/2.9763044c.chunk.js",
+    "static/css/main.db2df4ad.chunk.css",
+    "static/js/main.5f0c6745.chunk.js"
+  ]
+}
